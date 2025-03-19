@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import RankStatus from '@/components/ui/question';
 
 const quickStats = [
   {
@@ -235,44 +236,12 @@ export default function SkillTest() {
         </Card>
 
         {/* Question Analysis */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Question Analysis</CardTitle>
-          </CardHeader>
-          <CardContent className="h-[400px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={questionAnalysis}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {questionAnalysis.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="mt-4 flex justify-center gap-4">
-              {questionAnalysis.map((item) => (
-                <div key={item.name} className="flex items-center gap-2">
-                  <div
-                    className="h-3 w-3 rounded-full"
-                    style={{ backgroundColor: item.color }}
-                  />
-                  <span className="text-sm text-muted-foreground">
-                    {item.name} ({item.value}%)
-                  </span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        
+        <RankStatus
+          rank={Number(stats.rank)}
+          percentile={Number(stats.percentile)}
+          score={Number(stats.score)} correct={0} incorrect={0} skipped={0} />
+
       </div>
     </div>
   );
